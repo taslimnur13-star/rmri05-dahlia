@@ -495,25 +495,100 @@
       .ov-item, .ov-circle { background: transparent !important; outline: none !important; }
     }
   </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b3b38;--dark:#07332f;--line:#dbe7e6;--g:#d9f0b8;--t:#9ad8d0;--p:#f2b3b8;--l:#b3b5ee;--primary:#07332f;--primary-light:#d9f0b8}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;background:#e6e6e6;padding:18px;color:var(--ink);display:block}
+.app{display:flex;gap:22px;background:linear-gradient(160deg,#f1f6f6,#e2fafa);border-radius:32px;padding:26px;min-height:calc(100vh - 36px)}
+.rail{width:206px;flex-shrink:0;display:flex;flex-direction:column;gap:6px}
+.logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:600;margin-bottom:20px}
+.logo i{width:34px;height:34px;border-radius:50%;border:3px solid var(--dark);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:19px}
+.rail small{font-size:11px;font-weight:600;letter-spacing:.04em;margin:12px 4px 2px}
+.rail button{justify-content:flex-start;gap:12px;background:transparent;color:var(--ink);padding:6px 12px 6px 6px;border-radius:999px;font-size:13px;font-weight:500;width:100%;font-family:inherit}
+.rail button:hover{background:#dcebea}
+.rail button.active{background:var(--dark);color:#fff;box-shadow:none}
+.ic{width:34px;height:34px;border-radius:50%;background:#dcebea;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px}
+.hdr{display:flex;align-items:center;gap:12px}
+.hdr input{flex:1;max-width:520px;border-radius:999px;padding:12px 18px;background:rgba(255,255,255,.65);border:1px solid var(--line);font-family:inherit}
+.hdr input::placeholder{color:#8aa3a1}
+.chip{margin-left:auto;display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:rgba(255,255,255,.6);border-radius:999px;padding:6px 14px 6px 6px;font-size:12px;font-weight:600}
+.chip i{width:32px;height:32px;border-radius:50%;background:var(--dark);color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px}
+.welcome{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.welcome h1{font-size:27px;font-weight:500}.welcome p{font-size:12px;color:#5d7f7c;margin-top:2px}
+#btn-print{background:var(--dark);color:#fff;border-radius:999px;padding:13px 24px;font-size:13px;font-family:inherit}
+.workspace{flex-direction:row;align-items:flex-start;gap:14px;flex:none}
+.sidebar{width:420px;background:rgba(255,255,255,.7);border:1px solid #fff;border-radius:28px;padding:16px;max-height:none;border-right:0}
+.status-bar{border-radius:999px;padding:8px 14px;background:#e3efee;border-color:transparent}
+.step-tabs{background:#e3efee;border:0;border-radius:999px}
+.step-tab{border-radius:999px;font-family:inherit}.step-tab.active{background:var(--dark)}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px}
+.card-title{color:var(--ink)}
+input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12px;font-family:inherit}
+.pill-btn{border-radius:999px;border-color:var(--line);padding:5px 14px}.pill-btn.selected{background:var(--dark);border-color:var(--dark)}
+.btn-nav{border-radius:999px;background:#e3efee;font-family:inherit}.btn-nav.next{background:var(--dark)}
+.btn-add-row{border-radius:14px;background:#e6f6f3;color:#0b6b62;border-color:#7fcfc4}
+.mini-btn{border-radius:999px;background:#e6f6f3;color:#0b6b62}.mini-btn.del{background:#fbdcdf;color:#b4232f}
+.med-row-box{border-radius:16px;border-color:var(--line)}.shift-cell{background:#eef6f6;border-color:var(--line);border-radius:10px}
+.preview-pane{flex:1;min-width:0;background:rgba(255,255,255,.55);border:1px solid #fff;border-radius:28px;padding:20px}
+.preview-pane::before{content:"Pratinjau Form RMRI 05.00";font-size:18px;font-weight:600;margin-bottom:12px;position:sticky;left:0}
+.paper-sheet{border-radius:6px}
+.modal-backdrop{background:rgba(7,51,47,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.modal-box{background:#fff;border-radius:28px;width:100%;max-width:520px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 60px -12px rgba(7,51,47,.35);font-family:inherit;color:var(--ink)}
+.m-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 6px}
+.m-head h3{font-size:20px;font-weight:600}.m-head p{font-size:12px;color:#7a9895;margin-top:2px}
+.m-x{width:36px;height:36px;border-radius:50%;background:#eef4f3;color:var(--ink);padding:0;font-size:14px}.m-x:hover{background:#dcebea}
+.m-body{padding:12px 24px 22px;display:flex;flex-direction:column;gap:12px;min-height:0;flex:1}
+.m-search{position:relative}.m-search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:16px;height:16px;fill:none;stroke:#7a9895;stroke-width:2;stroke-linecap:round}
+#search-patient{padding:12px 16px 12px 42px;border-radius:999px;background:#f3f8f7;border:1px solid transparent;font-size:14px}
+#search-patient::placeholder{color:#8aa3a1}
+#search-patient:focus,.m-filters select:focus{outline:none;border-color:#7fcfc4;background:#fff}
+.m-filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m-filters select{border-radius:999px;background:#f3f8f7;border:1px solid transparent;padding:9px 14px;font-size:12px;font-weight:600;color:var(--ink)}
+#patient-list-container{overflow-y:auto;display:flex;flex-direction:column;gap:8px;min-height:120px}
+.pat-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #edf3f2;border-radius:20px;background:#fff;transition:.15s}
+.pat-item:hover{background:#f6fbfa;border-color:#cfe7e3}
+.pat-av{width:42px;height:42px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-weight:700;font-size:15px;flex-shrink:0}
+.pat-info{flex:1;min-width:0}
+.pat-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pat-rm{font-size:10.5px;font-weight:700;background:#e6f6f3;color:#0b6b62;border-radius:999px;padding:2px 8px;margin-left:6px}
+.pat-meta{font-size:11.5px;color:#4d6c69;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pat-meta.dim{color:#9bb1af;font-size:11px}
+.pat-actions{display:flex;gap:4px;align-items:center}
+.pat-actions .mini-btn.open{background:var(--dark);color:#fff;padding:8px 18px;font-size:12px;font-family:inherit}
+.pat-actions .mini-btn.del{width:32px;height:32px;padding:0;background:transparent;color:#b4232f;font-size:14px}.pat-actions .mini-btn.del:hover{background:#fbdcdf}
+.pat-empty{text-align:center;color:#8aa3a1;font-size:13px;padding:40px 0}
+@media(max-width:960px){body{padding:0}.app{flex-direction:column;border-radius:0;padding:14px;gap:14px}
+.rail{width:100%;flex-direction:row;align-items:center;overflow-x:auto;gap:4px}.rail small,.logo span{display:none}.logo{margin:0 6px 0 0}
+.rail button{width:auto;white-space:nowrap}
+.workspace{flex-direction:column;align-items:stretch}.sidebar{width:100%!important}.chip span{display:none}}
+@media print{body{padding:0!important;background:#fff!important}.app{display:block!important;padding:0!important;background:#fff!important;border-radius:0!important;min-height:0!important}
+.rail,.hdr,.welcome{display:none!important}.main{display:block}
+.preview-pane{border:0!important;border-radius:0!important;padding:0!important;background:#fff!important}.preview-pane::before{display:none}.paper-sheet{border-radius:0}}
+</style>
 </head>
 <body>
-
-  <div class="topbar">
-    <div class="topbar-title">
-      <span>RMRI 05.00 — IMPLEMENTASI KEPERAWATAN</span>
-      <span class="badge">RSUD dr. Abdul Rivai</span>
-    </div>
-    <div class="topbar-actions">
-      <button type="button" class="btn-save" id="btn-save-cloud">☁️ Simpan</button>
-      <button type="button" class="btn-list" id="btn-open-list">📋 Data Pasien</button>
-      <button type="button" class="btn-sample" id="btn-sample">✨ Contoh</button>
-      <button type="button" class="btn-calib" id="btn-calib">🎯 Geser &amp; Gaya</button>
-      <button type="button" class="btn-clear" id="btn-clear">🗑️ Baru</button>
-      <button type="button" class="btn-print" id="btn-print">🖨️ Print PDF</button>
-    </div>
-  </div>
-
-  <div class="workspace">
+  <div class="app">
+    <aside class="rail">
+      <div class="logo"><i>+</i><span>RMRI 05.00</span></div>
+      <small>MENU UTAMA</small>
+      <button type="button" class="btn-list" id="btn-open-list"><span class="ic">📋</span>Data Pasien</button>
+      <button type="button" class="btn-save" id="btn-save-cloud"><span class="ic">☁️</span>Simpan</button>
+      <button type="button" class="btn-clear" id="btn-clear"><span class="ic">🗑️</span>Baru</button>
+      <small>ALAT</small>
+      <button type="button" class="btn-sample" id="btn-sample"><span class="ic">✨</span>Contoh</button>
+      <button type="button" class="btn-calib" id="btn-calib"><span class="ic">🎯</span>Geser &amp; Gaya</button>
+    </aside>
+    <main class="main">
+      <div class="hdr">
+        <input type="text" id="hdr-search" placeholder="Cari pasien tersimpan..." autocomplete="off" />
+        <div class="chip"><i>RS</i><span>RSUD dr. Abdul Rivai</span></div>
+      </div>
+      <div class="welcome">
+        <div><h1>Implementasi Keperawatan</h1><p>Form RMRI 05.00 · RSUD dr. Abdul Rivai</p></div>
+        <button type="button" class="btn-print" id="btn-print">🖨️ Print PDF</button>
+      </div>
+      <div class="workspace">
     <div class="sidebar">
       <div class="status-bar" id="cloud-status">
         <span id="status-text">Supabase: Siap</span>
@@ -735,29 +810,24 @@
     </div>
   </div>
 
+  </main></div>
+
   <div class="modal-backdrop" id="patient-modal">
     <div class="modal-box">
-      <div class="modal-head">
-        <span>📋 Daftar Implementasi Tersimpan (Supabase)</span>
-        <button type="button" class="mini-btn del" id="btn-close-modal">✕ Tutup</button>
+      <div class="m-head">
+        <div><h3>Data Pasien</h3><p id="pat-count">Memuat data...</p></div>
+        <button type="button" class="m-x" id="btn-close-modal" aria-label="Tutup">✕</button>
       </div>
-      <div class="modal-body">
-        <input type="text" id="search-patient" autocomplete="off" />
-        <div class="filter-bar">
-          <div>
-            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:3px;">Filter Nama Dokter</label>
-            <select id="filter-dokter">
-              <option value="">Semua Dokter</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-size:11px;font-weight:700;color:#475569;display:block;margin-bottom:3px;">Filter Kelas</label>
-            <select id="filter-kelas">
-              <option value="">Semua Kelas</option>
-            </select>
-          </div>
+      <div class="m-body">
+        <div class="m-search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" id="search-patient" placeholder="Cari nama, No. RM, dokter..." autocomplete="off" />
         </div>
-        <div id="patient-list-container">Memuat data...</div>
+        <div class="m-filters">
+          <select id="filter-dokter"><option value="">Semua Dokter</option></select>
+          <select id="filter-kelas"><option value="">Semua Kelas</option></select>
+        </div>
+        <div id="patient-list-container"><div class="pat-empty">Memuat data...</div></div>
       </div>
     </div>
   </div>
@@ -1139,43 +1209,52 @@
 
       function renderPatientList(filtered) {
         const container = document.getElementById("patient-list-container");
+        const cnt = document.getElementById("pat-count");
+        if (cnt) cnt.textContent = filtered.length === cachedPatients.length ? filtered.length + " data tersimpan" : filtered.length + " dari " + cachedPatients.length + " data";
 
         if (!filtered.length) {
-          container.innerHTML = "<div style='font-size:12px;color:#64748b;padding:8px;'>Tidak ada data pasien yang cocok.</div>";
+          container.innerHTML = '<div class="pat-empty">Tidak ada data pasien yang cocok.</div>';
           return;
         }
 
+        const esc = (v) => String(v == null ? "" : v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+        const tints = ["#d9f0b8", "#9ad8d0", "#f2b3b8", "#b3b5ee"];
         container.innerHTML = "";
-        filtered.forEach((p) => {
+        filtered.forEach((p, i) => {
           const { dokter, kelas } = extractDokterAndKelas(p);
           const item = document.createElement("div");
           item.className = "pat-item";
 
+          const av = document.createElement("div");
+          av.className = "pat-av";
+          av.style.setProperty("--c", tints[i % tints.length]);
+          av.textContent = ((p.nama_pasien || "?").trim()[0] || "?").toUpperCase();
+
           const info = document.createElement("div");
           info.className = "pat-info";
           const dtLabel = p.updated_at ? new Date(p.updated_at).toLocaleString("id-ID", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
-          const dkLine = [dokter ? `Dokter: ${dokter}` : "", kelas ? `Kelas: ${kelas}` : ""].filter(Boolean).join(" • ");
-          info.innerHTML = `<strong>${p.nama_pasien || "-"}</strong> <span style="color:#0f766e;font-weight:700;">(RM: ${p.no_rm || "-"})</span>` +
-            (dkLine ? `<div class="pat-meta" style="color:#0f172a;font-weight:600;">${dkLine}</div>` : "") +
-            `<div class="pat-meta">${p.hari_tanggal || ""} • Update: ${dtLabel}</div>`;
+          const meta = [dokter, kelas].filter(Boolean).join(" · ");
+          const when = [p.hari_tanggal, dtLabel && "update " + dtLabel].filter(Boolean).join(" · ");
+          info.innerHTML = '<div class="pat-name">' + esc(p.nama_pasien || "-") + '<span class="pat-rm">' + esc(p.no_rm || "-") + "</span></div>" +
+            (meta ? '<div class="pat-meta">' + esc(meta) + "</div>" : "") +
+            (when ? '<div class="pat-meta dim">' + esc(when) + "</div>" : "");
 
           const acts = document.createElement("div");
           acts.className = "pat-actions";
-
           const btnLoad = document.createElement("button");
           btnLoad.type = "button";
-          btnLoad.className = "mini-btn";
+          btnLoad.className = "mini-btn open";
           btnLoad.textContent = "Buka";
           btnLoad.onclick = () => loadPatientById(p.id);
-
           const btnDel = document.createElement("button");
           btnDel.type = "button";
           btnDel.className = "mini-btn del";
-          btnDel.textContent = "Hapus";
+          btnDel.title = "Hapus";
+          btnDel.textContent = "🗑";
           btnDel.onclick = () => deletePatientById(p.id, p.nama_pasien || p.no_rm);
 
           acts.append(btnLoad, btnDel);
-          item.append(info, acts);
+          item.append(av, info, acts);
           container.appendChild(item);
         });
       }
@@ -1773,5 +1852,12 @@
       renderOverlay();
     })();
   </script>
+<script>
+(function(){
+  var hs=document.getElementById('hdr-search'),sp=document.getElementById('search-patient');
+  hs.addEventListener('focus',function(){document.getElementById('btn-open-list').click();sp.value=hs.value;setTimeout(function(){sp.focus()},50)});
+  hs.addEventListener('input',function(){sp.value=hs.value;sp.dispatchEvent(new Event('input'))});
+})();
+</script>
 </body>
 </html>
