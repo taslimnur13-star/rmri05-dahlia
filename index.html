@@ -581,6 +581,14 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 #print-all{display:none}
 @media(max-width:480px){.pat-item{gap:10px;padding:10px}.pat-av{width:54px;height:54px;border-radius:16px}.pat-actions{flex-direction:column}.pat-actions .mini-btn.open{padding:7px 12px}.m-head,.m-foot{padding-left:16px;padding-right:16px}.m-body{padding-left:16px;padding-right:16px}}
 @media print{body.printing-all .app{display:none!important}body.printing-all #print-all{display:block}.pa-page{width:355.6mm;height:215.9mm;overflow:hidden;break-after:page;page-break-after:always}.pa-page:last-child{break-after:auto;page-break-after:auto}.pa-page .paper-sheet{box-shadow:none;margin:0}}
+.save-bar{margin-top:14px}
+.save-bar button{width:100%;padding:15px;border-radius:999px;background:var(--dark);color:#fff;font-size:14px;font-weight:700;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px}
+.save-bar button:disabled{opacity:.55;cursor:wait}
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,24px);background:var(--dark);color:#fff;padding:12px 20px 12px 12px;border-radius:999px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;box-shadow:0 12px 30px rgba(7,51,47,.35);opacity:0;pointer-events:none;transition:.3s;z-index:9999;max-width:calc(100vw - 32px)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast i{width:26px;height:26px;border-radius:50%;background:#d9f0b8;color:var(--dark);display:grid;place-items:center;font-style:normal;font-weight:800;flex-shrink:0}
+#toast span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media print{#toast{display:none!important}.save-bar{display:none!important}}
 </style>
 </head>
 <body>
@@ -589,7 +597,6 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
       <div class="logo"><i>+</i><span>RMRI 05.00</span></div>
       <small>MENU UTAMA</small>
       <button type="button" class="btn-list" id="btn-open-list"><span class="ic">📋</span>Data Pasien</button>
-      <button type="button" class="btn-save" id="btn-save-cloud"><span class="ic">☁️</span>Simpan</button>
       <button type="button" class="btn-clear" id="btn-clear"><span class="ic">🗑️</span>Baru</button>
       <small>ALAT</small>
       <button type="button" class="btn-sample" id="btn-sample"><span class="ic">✨</span>Contoh</button>
@@ -746,6 +753,7 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           <button type="button" class="btn-nav next" onclick="window.print()">🖨️ Selesai &amp; Print</button>
         </div>
       </div>
+      <div class="save-bar"><button type="button" class="btn-save" id="btn-save-cloud">☁️ Simpan Data Pasien</button></div>
     </div>
 
     <div class="preview-pane">
@@ -1026,6 +1034,8 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         }
 
         setStatus("Menyimpan ke Supabase...", "");
+        const sb = document.getElementById("btn-save-cloud");
+        sb.disabled = true;
         const payload = {
           no_rm: cleanRm || "-",
           nama_pasien: cleanName || "-",
@@ -1059,12 +1069,28 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           if (Array.isArray(rows) && rows[0]?.id) {
             currentRecordId = rows[0].id;
           }
-          setStatus("Tersimpan di Supabase (" + new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + ")", "ok");
+          const savedLabel = cleanName || cleanRm;
+          document.getElementById("btn-clear").click();
+          if (typeof window.goStep === "function") window.goStep(1);
+          setStatus("Tersimpan (" + savedLabel + "). Form kosong, siap untuk pasien baru.", "ok");
+          showToast("Data " + savedLabel + " berhasil disimpan");
         } catch (err) {
           console.error(err);
           setStatus("Gagal simpan: cek tabel/RLS Supabase", "err");
           alert("Gagal menyimpan ke Supabase:\n" + err.message);
+        } finally {
+          sb.disabled = false;
         }
+      }
+
+      function showToast(msg) {
+        let t = document.getElementById("toast");
+        if (!t) { t = document.createElement("div"); t.id = "toast"; document.body.appendChild(t); }
+        t.innerHTML = '<i>✓</i><span></span>';
+        t.lastChild.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => t.classList.remove("show"), 3500);
       }
 
       function populateFilterDropdowns() {
@@ -1659,6 +1685,20 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 
         addText({ type: "point", key: "dokter" }, state.dokter, coords.dokter.x, coords.dokter.y);
         addText({ type: "point", key: "diagnosis" }, state.diagnosis, coords.diagnosis.x, coords.diagnosis.y);
+        if (state.diagnosis) {
+          const el = layer.lastElementChild;
+          const bs = 96 / 25.4;
+          el.classList.add("wrap");
+          el.style.width = Math.max(20, 228.5 - coords.diagnosis.x) + "mm";
+          const base = parseFloat(getComputedStyle(el).fontSize) || 11;
+          const h1 = base * 1.15;
+          if (el.scrollHeight > h1 + 2) {
+            el.style.lineHeight = "1.05";
+            let fs = base;
+            while (el.scrollHeight > 5.0 * bs && fs > 6) { fs -= 0.25; el.style.fontSize = fs + "px"; }
+            el.style.top = (coords.diagnosis.y + (h1 / 2 - el.scrollHeight / 2) / bs - 0.6) + "mm";
+          }
+        }
         addText({ type: "point", key: "hariTanggal" }, state.hariTanggal, coords.hariTanggal.x, coords.hariTanggal.y);
         addText({ type: "point", key: "ketuaTim" }, state.ketuaTim, coords.ketuaTim.x, coords.ketuaTim.y);
 
@@ -1801,14 +1841,17 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
       document.getElementById("sel-font-family").addEventListener("change", (e) => {
         overlayStyle.fontFamily = e.target.value;
         applyOverlayStyle();
+        renderOverlay();
       });
       document.getElementById("sel-font-scale").addEventListener("change", (e) => {
         overlayStyle.fontScale = e.target.value;
         applyOverlayStyle();
+        renderOverlay();
       });
       document.getElementById("sel-font-weight").addEventListener("change", (e) => {
         overlayStyle.fontWeight = e.target.value;
         applyOverlayStyle();
+        renderOverlay();
       });
       document.querySelectorAll(".color-swatch").forEach((sw) => {
         sw.addEventListener("click", () => {
