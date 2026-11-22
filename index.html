@@ -560,21 +560,6 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 .pat-actions .mini-btn.open{background:var(--dark);color:#fff;padding:8px 18px;font-size:12px;font-family:inherit}
 .pat-actions .mini-btn.del{width:32px;height:32px;padding:0;background:transparent;color:#b4232f;font-size:14px}.pat-actions .mini-btn.del:hover{background:#fbdcdf}
 .pat-empty{text-align:center;color:#8aa3a1;font-size:13px;padding:40px 0}
-.step-tab{gap:3px;padding:7px 2px;white-space:nowrap}
-.tab-badge{display:none;background:#16a34a;color:#fff;font-size:9px;font-weight:800;min-width:15px;height:15px;padding:0 4px;border-radius:999px;align-items:center;justify-content:center;line-height:1}
-.step-tab.has-data{background:#bbf7d0;color:#14532d;box-shadow:inset 0 0 0 1.5px #16a34a}
-.step-tab.has-data .tab-badge{display:inline-flex}
-.step-tab.active.has-data{background:var(--dark);color:#fff;box-shadow:inset 0 0 0 2px #22c55e}
-.step-tab.active.has-data .tab-badge{background:#22c55e;color:#052e16}
-.med-row-box.filled{background:#f0fdf4;border-color:#22c55e;box-shadow:inset 0 0 0 .5px #22c55e,0 2px 6px rgba(34,197,94,.12)}
-.med-row-box.filled .med-row-header{color:#14532d}
-.med-status-pill{display:none;font-size:9.5px;font-weight:800;background:#dcfce7;color:#15803d;border:1px solid #86efac;padding:1px 7px;border-radius:999px;margin-left:6px}
-.med-row-box.filled .med-status-pill{display:inline-flex;align-items:center}
-.med-row-box input.filled{background:#dcfce7;border-color:#16a34a;color:#052e16;font-weight:600}
-.shift-cell.filled{background:#bbf7d0;border-color:#16a34a}
-.shift-cell.filled span{color:#14532d}
-.shift-cell.filled input.filled{background:#f0fdf4;border-color:#16a34a;color:#052e16;font-weight:700}
-@media(max-width:480px){.step-tab{font-size:9.5px;padding:6px 2px;gap:2px}.tab-badge{min-width:13px;height:13px;font-size:8px;padding:0 3px}}
 @media(max-width:960px){body{padding:0}.app{flex-direction:column;border-radius:0;padding:14px;gap:14px}
 .rail{width:100%;flex-direction:row;align-items:center;overflow-x:auto;gap:4px}.rail small,.logo span{display:none}.logo{margin:0 6px 0 0}
 .rail button{width:auto;white-space:nowrap}
@@ -615,9 +600,9 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
       <div class="step-tabs">
         <button type="button" class="step-tab active" data-step-btn="1">1. Identitas</button>
         <button type="button" class="step-tab" data-step-btn="2">2. Istimewa</button>
-        <button type="button" class="step-tab" data-step-btn="3">3. Infus<span class="tab-badge" id="tab-badge-INFUS"></span></button>
-        <button type="button" class="step-tab" data-step-btn="4">4. Injeksi<span class="tab-badge" id="tab-badge-INJEKSI"></span></button>
-        <button type="button" class="step-tab" data-step-btn="5">5. Oral<span class="tab-badge" id="tab-badge-ORAL"></span></button>
+        <button type="button" class="step-tab" data-step-btn="3">3. Infus</button>
+        <button type="button" class="step-tab" data-step-btn="4">4. Injeksi</button>
+        <button type="button" class="step-tab" data-step-btn="5">5. Oral</button>
       </div>
 
       <div class="step-panel active" id="step-panel-1">
@@ -696,6 +681,31 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           </div>
           <div id="istimewa-list"></div>
           <button type="button" class="btn-add-row" id="btn-add-ist">+ Tambah Baris Hal Istimewa</button>
+
+          <div class="grid-3" style="margin-top:10px;">
+            <div class="field">
+              <label>Pupil OD (mm)</label>
+              <input type="text" data-bind="pupilOd" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label>Pupil OS (mm)</label>
+              <input type="text" data-bind="pupilOs" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label>Lingkari Skala</label>
+              <select data-bind="pupilSkala" id="sel-pupil-skala">
+                <option value="">-</option>
+                <option value="4">&gt; 4 mm</option>
+                <option value="3">3 mm</option>
+                <option value="2">2 mm</option>
+                <option value="1">&lt; 2 mm</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Keadaan Luka</label>
+            <textarea rows="2" data-bind="keadaanLuka" autocomplete="off"></textarea>
+          </div>
         </div>
         <div class="step-footer">
           <button type="button" class="btn-nav" onclick="goStep(1)">← Identitas</button>
@@ -931,6 +941,7 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         noRm: "", namaPasien: "", tglLahir: "",
         jk: "", tim: "", ketuaTim: "", dokter: "",
         diagnosis: "", ruangKelas: "",
+        pupilOd: "", pupilOs: "", pupilSkala: "", keadaanLuka: "",
         istimewa: [{ jam: "", ket: "", paraf: "" }],
         meds: {
           INFUS: [createEmptyMed()],
@@ -963,6 +974,14 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 
         ruang:       { x: 256.0, y: 36.2 },
         kelas:       { x: 302.5, y: 36.2 },
+
+        pupilOd:     { x: 40.5, y: 135.0 },
+        pupilOs:     { x: 70.5, y: 135.0 },
+        pupilCircle4: { x: 42.1, y: 144.6 },
+        pupilCircle3: { x: 52.6, y: 144.6 },
+        pupilCircle2: { x: 63.3, y: 144.6 },
+        pupilCircle1: { x: 73.7, y: 144.6 },
+        keadaanLuka: { x: 52.0, y: 153.2 },
 
         istStartY: 55.6,
         istStepY:  4.23,
@@ -1129,6 +1148,10 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
             dokter: fd.dokter || "",
             diagnosis: fd.diagnosis || "",
             ruangKelas: fd.ruangKelas || "",
+            pupilOd: fd.pupilOd || "",
+            pupilOs: fd.pupilOs || "",
+            pupilSkala: fd.pupilSkala || "",
+            keadaanLuka: fd.keadaanLuka || "",
             istimewa: Array.isArray(fd.istimewa) && fd.istimewa.length ? fd.istimewa : [{ jam: "", ket: "", paraf: "" }],
             meds: {
               INFUS: Array.isArray(fd.meds?.INFUS) && fd.meds.INFUS.length ? fd.meds.INFUS : [createEmptyMed()],
@@ -1295,42 +1318,6 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         if (addBtn) addBtn.disabled = state.istimewa.length >= MAX_ROWS.ISTIMEWA;
       }
 
-      const MED_STEP_MAP = { INFUS: "3", INJEKSI: "4", ORAL: "5" };
-      const MED_SHIFTS = ["pagi", "siang", "sore", "malam", "extra"];
-
-      function isFilledVal(v) {
-        return String(v || "").trim() !== "";
-      }
-
-      function isMedRowFilled(med) {
-        if (!med) return false;
-        if (isFilledVal(med.nama) || isFilledVal(med.dosis)) return true;
-        return MED_SHIFTS.some((sh) => isFilledVal(med[sh + "Jam"]) || isFilledVal(med[sh + "Paraf"]));
-      }
-
-      function getFilledMedCount(group) {
-        return (state.meds[group] || []).filter(isMedRowFilled).length;
-      }
-
-      function updateMedGroupHeaderAndTab(group) {
-        const maxLen = MAX_ROWS[group];
-        const filledCount = getFilledMedCount(group);
-
-        const cnt = document.getElementById("counter-" + group);
-        if (cnt) {
-          cnt.textContent = filledCount > 0
-            ? `${filledCount} Terisi · ${state.meds[group].length} / ${maxLen} Baris`
-            : `${state.meds[group].length} / ${maxLen} Baris`;
-          cnt.style.color = filledCount > 0 ? "#15803d" : "#64748b";
-          cnt.style.fontWeight = filledCount > 0 ? "800" : "600";
-        }
-
-        const tabBtn = document.querySelector(`.step-tab[data-step-btn="${MED_STEP_MAP[group]}"]`);
-        const badge = document.getElementById("tab-badge-" + group);
-        if (tabBtn) tabBtn.classList.toggle("has-data", filledCount > 0);
-        if (badge) badge.textContent = filledCount > 0 ? String(filledCount) : "";
-      }
-
       function buildMedGroupForm(group) {
         const container = document.getElementById("meds-list-" + group);
         container.innerHTML = "";
@@ -1338,18 +1325,12 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 
         state.meds[group].forEach((med, idx) => {
           const box = document.createElement("div");
-          box.className = "med-row-box" + (isMedRowFilled(med) ? " filled" : "");
+          box.className = "med-row-box";
 
           const header = document.createElement("div");
           header.className = "med-row-header";
-          const lblWrap = document.createElement("div");
-          lblWrap.style.cssText = "display:flex;align-items:center;";
           const lbl = document.createElement("span");
           lbl.textContent = "#" + (idx + 1) + " " + (group === "ORAL" ? "ORAL/Lainnya" : group);
-          const statusPill = document.createElement("span");
-          statusPill.className = "med-status-pill";
-          statusPill.textContent = "✓ Terisi";
-          lblWrap.append(lbl, statusPill);
 
           const btnGroup = document.createElement("div");
           btnGroup.style.cssText = "display:flex;gap:4px;";
@@ -1374,41 +1355,24 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
             btnGroup.appendChild(delBtn);
           }
 
-          header.append(lblWrap, btnGroup);
-
-          const syncRowVisual = () => {
-            box.classList.toggle("filled", isMedRowFilled(state.meds[group][idx]));
-            updateMedGroupHeaderAndTab(group);
-          };
+          header.append(lbl, btnGroup);
 
           const topGrid = document.createElement("div");
           topGrid.className = "grid-2";
           const inpNama = document.createElement("input");
           inpNama.setAttribute("autocomplete", "off");
           inpNama.value = med.nama;
-          inpNama.classList.toggle("filled", isFilledVal(med.nama));
-          inpNama.addEventListener("input", (e) => {
-            state.meds[group][idx].nama = e.target.value;
-            inpNama.classList.toggle("filled", isFilledVal(e.target.value));
-            syncRowVisual();
-            renderOverlay();
-          });
+          inpNama.addEventListener("input", (e) => { state.meds[group][idx].nama = e.target.value; renderOverlay(); });
 
           const inpDosis = document.createElement("input");
           inpDosis.setAttribute("autocomplete", "off");
           inpDosis.value = med.dosis;
-          inpDosis.classList.toggle("filled", isFilledVal(med.dosis));
-          inpDosis.addEventListener("input", (e) => {
-            state.meds[group][idx].dosis = e.target.value;
-            inpDosis.classList.toggle("filled", isFilledVal(e.target.value));
-            syncRowVisual();
-            renderOverlay();
-          });
+          inpDosis.addEventListener("input", (e) => { state.meds[group][idx].dosis = e.target.value; renderOverlay(); });
           topGrid.append(inpNama, inpDosis);
 
           const shiftGrid = document.createElement("div");
           shiftGrid.className = "shift-grid";
-          MED_SHIFTS.forEach((sh) => {
+          ["pagi", "siang", "sore", "malam", "extra"].forEach((sh) => {
             const cell = document.createElement("div");
             cell.className = "shift-cell";
             const sp = document.createElement("span");
@@ -1417,34 +1381,12 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
             const iJam = document.createElement("input");
             iJam.setAttribute("autocomplete", "off");
             iJam.value = med[sh + "Jam"];
+            iJam.addEventListener("input", (e) => { state.meds[group][idx][sh + "Jam"] = e.target.value; renderOverlay(); });
 
             const iPrf = document.createElement("input");
             iPrf.setAttribute("autocomplete", "off");
             iPrf.value = med[sh + "Paraf"];
-
-            const syncShiftCell = () => {
-              const cur = state.meds[group][idx];
-              const hasJam = isFilledVal(cur[sh + "Jam"]);
-              const hasPrf = isFilledVal(cur[sh + "Paraf"]);
-              iJam.classList.toggle("filled", hasJam);
-              iPrf.classList.toggle("filled", hasPrf);
-              cell.classList.toggle("filled", hasJam || hasPrf);
-            };
-            syncShiftCell();
-
-            iJam.addEventListener("input", (e) => {
-              state.meds[group][idx][sh + "Jam"] = e.target.value;
-              syncShiftCell();
-              syncRowVisual();
-              renderOverlay();
-            });
-
-            iPrf.addEventListener("input", (e) => {
-              state.meds[group][idx][sh + "Paraf"] = e.target.value;
-              syncShiftCell();
-              syncRowVisual();
-              renderOverlay();
-            });
+            iPrf.addEventListener("input", (e) => { state.meds[group][idx][sh + "Paraf"] = e.target.value; renderOverlay(); });
 
             cell.append(sp, iJam, iPrf);
             shiftGrid.appendChild(cell);
@@ -1454,7 +1396,8 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           container.appendChild(box);
         });
 
-        updateMedGroupHeaderAndTab(group);
+        const cnt = document.getElementById("counter-" + group);
+        if (cnt) cnt.textContent = `${state.meds[group].length} / ${maxLen} Baris`;
         const addBtn = document.getElementById("btn-add-" + group);
         if (addBtn) addBtn.disabled = state.meds[group].length >= maxLen;
       }
@@ -1683,6 +1626,14 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           );
         });
 
+        addText({ type: "point", key: "pupilOd" }, state.pupilOd, coords.pupilOd.x, coords.pupilOd.y, { size: "8.5pt" });
+        addText({ type: "point", key: "pupilOs" }, state.pupilOs, coords.pupilOs.x, coords.pupilOs.y, { size: "8.5pt" });
+        if (state.pupilSkala && coords["pupilCircle" + state.pupilSkala]) {
+          const pc = coords["pupilCircle" + state.pupilSkala];
+          addCircle("pupilCircle" + state.pupilSkala, pc.x, pc.y, 26);
+        }
+        addText({ type: "point", key: "keadaanLuka" }, state.keadaanLuka, coords.keadaanLuka.x, coords.keadaanLuka.y, { size: "7.5pt", w: 34, wrap: true });
+
         const renderMedGroup = (group, startYKey) => {
           const startY = coords[startYKey];
           state.meds[group].forEach((m, idx) => {
@@ -1734,6 +1685,10 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           state[el.dataset.bind] = e.target.value;
           renderOverlay();
         });
+      });
+      document.getElementById("sel-pupil-skala").addEventListener("change", (e) => {
+        state.pupilSkala = e.target.value;
+        renderOverlay();
       });
 
       document.querySelectorAll("[data-radio]").forEach((btn) => {
@@ -1809,6 +1764,10 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         state.tglLahir = "16031992";
         state.jk = "L";
         state.ruangKelas = "Dahlia / III";
+        state.pupilOd = "3";
+        state.pupilOs = "3";
+        state.pupilSkala = "3";
+        state.keadaanLuka = "Luka pedis dextra bersih, balutan kering.";
 
         state.istimewa = [
           { jam: "08.30", ket: "Cek GDS: 186 mg/dL", paraf: "Ns.TN" },
