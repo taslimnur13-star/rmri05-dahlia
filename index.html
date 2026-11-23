@@ -595,6 +595,47 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 .ist-ket{width:100%;resize:none;overflow:hidden;line-height:1.35;min-height:36px;font-family:inherit;font-size:13px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#0f172a;box-sizing:border-box}
 .ist-grid input::placeholder,.ist-ket::placeholder{color:#9bb1af!important;opacity:1}
 @media(max-width:400px){.ist-lab{display:none}.ist-grid{grid-template-columns:1fr 1fr}.ist-grid>:nth-child(1){grid-column:1;grid-row:1}.ist-grid>:nth-child(3){grid-column:2;grid-row:1}.ist-grid>:nth-child(2){grid-column:1/-1;grid-row:2}}
+#filter-ist{display:none}
+.m-pills{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 4px;scrollbar-width:none}.m-pills::-webkit-scrollbar{display:none}
+.m-pills button{flex-shrink:0;background:#fff;border:1px solid #e6e3f5;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600;color:#1f1b3a;white-space:nowrap;box-shadow:0 2px 8px rgba(101,81,193,.1);font-family:inherit}
+.m-pills button.on{background:#7b69d6;border-color:#7b69d6;color:#fff}
+.m-legend{display:flex;gap:16px;font-size:12.5px;font-weight:500;color:#3a3560;flex-wrap:wrap}
+.m-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.m-legend .t-inf{background:#2fae93}.m-legend .t-inj{background:#d9566c}.m-legend .t-ora{background:#4c74e0}
+.pat-item.pc{display:block;padding:0;gap:0;flex-shrink:0;overflow:hidden;border:1.5px solid transparent;border-radius:26px;background:#fff;box-shadow:0 6px 16px rgba(101,81,193,.16)}
+.pat-item.pc:hover{background:#fff;border-color:transparent}
+.pat-item.pc.open{border-color:#7b69cf}
+.pat-item.pc.sel{box-shadow:0 0 0 3px #b9aef0,0 6px 16px rgba(101,81,193,.16);background:#fff}
+.pc-head{display:flex;align-items:center;gap:10px;padding:14px 12px 14px 14px;background:linear-gradient(135deg,#8577d6,#6551c1);color:#fff;cursor:pointer}
+.pc-head .pat-chk{border-color:rgba(255,255,255,.75);background:transparent;width:20px;height:20px;min-width:20px}
+.pc-head .pat-chk:checked{background:#fff;border-color:#fff}.pc-head .pat-chk:checked::after{border-color:#6551c1}
+.pc-room{width:58px;height:58px;border-radius:18px;background:#fff;color:#5b47bb;display:grid;place-items:center;flex-shrink:0;box-shadow:0 6px 12px rgba(0,0,0,.14)}
+.pc-room b{font-weight:800;line-height:1;letter-spacing:-.02em}
+.pc-info{flex:1;min-width:0}
+.pc-name{font-size:16px;font-weight:800;text-transform:uppercase;line-height:1.15;word-break:break-word}
+.pc-sub{font-size:11.5px;color:rgba(255,255,255,.82);margin-top:3px;line-height:1.35}
+.pc-kls{display:inline-block;background:rgba(255,255,255,.22);color:#fff;font-weight:800;border-radius:999px;padding:1px 9px;margin-right:6px}
+.pc-istb{display:inline-block;background:#ffe9a8;color:#6b4700;font-weight:800;font-size:10.5px;border-radius:999px;padding:1px 8px;margin-left:4px}
+.pc-chev{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .2s;transform:rotate(-90deg)}
+.pat-item.open .pc-chev{transform:none}
+.pc-acts{display:flex;gap:6px;flex-shrink:0}
+.pc-btn{width:38px;height:38px;border-radius:50%;padding:0;display:grid;place-items:center}
+.pc-btn svg{width:17px;height:17px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pc-btn.edit{background:rgba(255,255,255,.22)}.pc-btn.edit svg{stroke:#fff}
+.pc-btn.del{background:#fff}.pc-btn.del svg{stroke:#d9364b}
+.pc-body{display:none;padding:6px 14px 12px;background:#fff}.pat-item.open .pc-body{display:block}
+.pc-med{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #eeecf6}.pc-med:last-of-type{border-bottom:0}
+.pc-chip{min-width:60px;height:46px;border-radius:15px;display:grid;place-items:center;font-weight:800;font-size:14px;padding:0 6px;flex-shrink:0}
+.pc-chip.t-inf{background:#d6f1ea;color:#1d7a63}.pc-chip.t-inj{background:#fde2e6;color:#c0364b}.pc-chip.t-ora{background:#e1e9fc;color:#2f55d4}
+.pc-mi{min-width:0;flex:1}.pc-mn{font-size:15px;font-weight:700;color:#1b1838;word-break:break-word}
+.pc-ms{font-size:12.5px;color:#7a7894;margin-top:1px}.pc-ms b{font-weight:700}
+.pc-ms .t-inf{color:#1d9a7e}.pc-ms .t-inj{color:#d9566c}.pc-ms .t-ora{color:#3a63e0}
+.pc-mt{font-size:11.5px;color:#9a98b0;margin-top:2px}
+.pc-none{font-size:12.5px;color:#9a98b0;padding:12px 0}
+.pc-ist{margin-top:8px;background:#fff7dc;border-radius:16px;padding:10px 12px;font-size:12.5px;color:#5c4300}
+.pc-ist b{display:block;margin-bottom:4px}.pc-ist span{font-weight:800}
+.pc-upd{font-size:11px;color:#a9a7bd;margin-top:10px;text-align:right}
+@media(max-width:480px){.pc-head{gap:8px;padding:12px 10px 12px 12px}.pc-room{width:50px;height:50px;border-radius:16px}.pc-name{font-size:14.5px}.pc-btn{width:34px;height:34px}.pc-acts{gap:4px}.m-head,.m-body{padding-left:14px;padding-right:14px}.m-foot{padding-left:14px;padding-right:14px}}
 </style>
 </head>
 <body>
@@ -828,11 +869,13 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           <input type="text" id="search-patient" placeholder="Cari nama, No. RM, dokter..." autocomplete="off" />
         </div>
+        <div class="m-pills" id="ist-pills"><button type="button" data-v="" data-l="Semua" class="on">Semua</button><button type="button" data-v="ada" data-l="★ Istimewa">★ Istimewa</button><button type="button" data-v="tidak" data-l="Tanpa Istimewa">Tanpa Istimewa</button></div>
         <div class="m-filters">
           <select id="filter-dokter"><option value="">Semua Dokter</option></select>
           <select id="filter-kelas"><option value="">Semua Kelas</option></select>
           <select id="filter-ist"><option value="">Semua Pasien</option><option value="ada">★ Ada Hal Istimewa</option><option value="tidak">Tanpa Hal Istimewa</option></select>
         </div>
+        <div class="m-legend"><span><i class="t-inf"></i>Infus</span><span><i class="t-inj"></i>Injeksi</span><span><i class="t-ora"></i>Oral</span></div>
         <div id="patient-list-container"><div class="pat-empty">Memuat data...</div></div>
       </div>
       <div class="m-foot">
@@ -962,6 +1005,7 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
       const defaultCoords = {
         dokter:      { x: 135.0, y: 12.2 },
         diagnosis:   { x: 135.0, y: 18.2 },
+        judul:       { x: 135.0, y: 2.2 },
         hariTanggal: { x: 135.0, y: 24.4 },
         ketuaTim:    { x: 135.0, y: 30.2 },
         tim1:        { x: 146.1, y: 37.3 },
@@ -1310,6 +1354,12 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 
       document.addEventListener("click", () => { if (printStart && Date.now() - printStart > 2500) cleanupPrintAll(); }, true);
       document.getElementById("filter-ist").addEventListener("change", applyPatientFilters);
+      document.getElementById("ist-pills").addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        document.getElementById("filter-ist").value = b.dataset.v;
+        applyPatientFilters();
+      });
       document.getElementById("btn-print-sel").addEventListener("click", printSelected);
       document.getElementById("chk-all").addEventListener("change", (e) => {
         (window._patFiltered || []).forEach((p) => (e.target.checked ? selIds.add(p.id) : selIds.delete(p.id)));
@@ -1325,7 +1375,20 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
       function renderPatientList(filtered) {
         const container = document.getElementById("patient-list-container");
         const cnt = document.getElementById("pat-count");
-        if (cnt) cnt.textContent = filtered.length === cachedPatients.length ? filtered.length + " data tersimpan" : filtered.length + " dari " + cachedPatients.length + " data";
+        const today = new Date().toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long" });
+        if (cnt) cnt.textContent = (filtered.length === cachedPatients.length ? filtered.length + " pasien" : filtered.length + " dari " + cachedPatients.length + " pasien") + " · " + today;
+
+        const pills = document.getElementById("ist-pills");
+        if (pills) {
+          const nAda = cachedPatients.filter((q) => hasIst(q)).length;
+          const cur = document.getElementById("filter-ist").value;
+          pills.querySelectorAll("button").forEach((bt) => {
+            const v = bt.dataset.v;
+            const n = v === "" ? cachedPatients.length : v === "ada" ? nAda : cachedPatients.length - nAda;
+            bt.textContent = bt.dataset.l + " (" + n + ")";
+            bt.classList.toggle("on", v === cur);
+          });
+        }
 
         window._patFiltered = filtered;
         if (!filtered.length) {
@@ -1335,56 +1398,62 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         }
 
         const esc = (v) => String(v == null ? "" : v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-        const tints = ["#d9f0b8", "#9ad8d0", "#f2b3b8", "#b3b5ee"];
+        const TYPES = [["INFUS", "Infus", "t-inf"], ["INJEKSI", "Injeksi", "t-inj"], ["ORAL", "Oral", "t-ora"]];
+        const SHIFTS = [["pagi", "Pagi"], ["siang", "Siang"], ["sore", "Sore"], ["malam", "Malam"], ["extra", "Extra"]];
+        const fmtJam = (j) => (/^\d{1,2}$/.test(j) ? ("0" + j).slice(-2) + ":00" : j);
+        const ICON_EDIT = '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';
+        const ICON_DEL = '<svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>';
+
         container.innerHTML = "";
         filtered.forEach((p, i) => {
-          const { dokter, kelas } = extractDokterAndKelas(p);
+          const fd = p.form_data || {};
+          const { dokter } = extractDokterAndKelas(p);
+          const rk = String(fd.ruangKelas || "").split("/");
+          const ruang = (rk[0] || "").trim(), kls = (rk[1] || "").trim();
+
+          let total = 0, medsHtml = "";
+          TYPES.forEach(([g, label, cls]) => {
+            ((fd.meds && fd.meds[g]) || []).forEach((m) => {
+              if (!m || !String(m.nama || "").trim()) return;
+              total++;
+              const jam = (k) => String(m[k + "Jam"] || "").trim();
+              const times = SHIFTS.filter(([k]) => jam(k)).map(([k, l]) => l + " " + jam(k));
+              const first = SHIFTS.map(([k]) => jam(k)).find(Boolean);
+              medsHtml += '<div class="pc-med"><div class="pc-chip ' + cls + '">' + esc(first ? fmtJam(first) : label) + '</div><div class="pc-mi"><div class="pc-mn">' + esc(m.nama) +
+                '</div><div class="pc-ms"><b class="' + cls + '">' + label + "</b>" + (m.dosis ? " · " + esc(m.dosis) : "") + "</div>" +
+                (times.length ? '<div class="pc-mt">' + esc(times.join(" · ")) + "</div>" : "") + "</div></div>";
+            });
+          });
+          const ist = ((fd.istimewa || []).filter((r) => r && [r.jam, r.ket, r.paraf].some((v) => String(v || "").trim())));
+          const istHtml = ist.length
+            ? '<div class="pc-ist"><b>★ Hal istimewa</b>' + ist.map((r) => "<div>" + (r.jam ? "<span>" + esc(r.jam) + "</span> " : "") + esc(r.ket || "") + "</div>").join("") + "</div>"
+            : "";
+
+          const fs = ruang.length <= 2 ? 26 : ruang.length === 3 ? 20 : ruang.length === 4 ? 15 : 11;
           const item = document.createElement("div");
-          item.className = "pat-item";
+          item.className = "pat-item pc" + (i === 0 ? " open" : "");
           item._id = p.id;
-          const chk = document.createElement("input");
-          chk.type = "checkbox";
-          chk.className = "pat-chk";
-          chk.title = "Pilih untuk print";
+          item.innerHTML =
+            '<div class="pc-head"><input type="checkbox" class="pat-chk" title="Pilih untuk print">' +
+            '<div class="pc-room"><b style="font-size:' + fs + 'px">' + esc(ruang || "–") + "</b></div>" +
+            '<div class="pc-info"><div class="pc-name">' + esc(p.nama_pasien || "-") + "</div>" +
+            '<div class="pc-sub">' + (kls ? '<span class="pc-kls">Kelas ' + esc(kls) + "</span>" : "") + esc(dokter || "") + "</div>" +
+            '<div class="pc-sub">RM ' + esc(p.no_rm || "-") + " · " + total + " obat" + (ist.length ? ' <span class="pc-istb">★ Istimewa</span>' : "") + "</div></div>" +
+            '<svg class="pc-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>' +
+            '<div class="pc-acts"><button type="button" class="pc-btn edit" title="Buka">' + ICON_EDIT + '</button><button type="button" class="pc-btn del" title="Hapus">' + ICON_DEL + "</button></div></div>" +
+            '<div class="pc-body">' + (medsHtml || '<div class="pc-none">Belum ada obat tercatat.</div>') + istHtml +
+            '<div class="pc-upd">' + esc([p.hari_tanggal, p.updated_at ? "update " + new Date(p.updated_at).toLocaleString("id-ID", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }) : ""].filter(Boolean).join(" · ")) + "</div></div>";
+
+          const chk = item.querySelector(".pat-chk");
           chk.checked = selIds.has(p.id);
           item.classList.toggle("sel", chk.checked);
           chk.addEventListener("change", () => { chk.checked ? selIds.add(p.id) : selIds.delete(p.id); item.classList.toggle("sel", chk.checked); updateSelUI(); });
-
-          const rk = String((p.form_data && p.form_data.ruangKelas) || "").split("/");
-          const ruang = (rk[0] || "").trim(), kls = (rk[1] || "").trim();
-          const ki = parseInt(kls, 10);
-          const tint = tints[(ki >= 1 && ki <= 4 ? ki - 1 : i) % tints.length];
-          const av = document.createElement("div");
-          av.className = "pat-av";
-          av.style.setProperty("--c", tint);
-          const fs = ruang.length <= 2 ? 30 : ruang.length === 3 ? 23 : 14;
-          av.innerHTML = '<b style="font-size:' + fs + 'px">' + esc(ruang || "–") + "</b><span>RUANG</span>";
-
-          const info = document.createElement("div");
-          info.className = "pat-info";
-          const dtLabel = p.updated_at ? new Date(p.updated_at).toLocaleString("id-ID", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
-          const meta = dokter;
-          const when = [p.hari_tanggal, dtLabel && "update " + dtLabel].filter(Boolean).join(" · ");
-          info.innerHTML = '<div class="pat-name">' + esc(p.nama_pasien || "-") + '<span class="pat-rm">' + esc(p.no_rm || "-") + "</span></div>" +
-            (kls || meta || hasIst(p) ? '<div class="pat-meta">' + (kls ? '<span class="pat-kls" style="--c:' + tint + '">Kelas ' + esc(kls) + "</span>" : "") + (hasIst(p) ? '<span class="pat-ist">★ Istimewa</span>' : "") + esc(meta) + "</div>" : "") +
-            (when ? '<div class="pat-meta dim">' + esc(when) + "</div>" : "");
-
-          const acts = document.createElement("div");
-          acts.className = "pat-actions";
-          const btnLoad = document.createElement("button");
-          btnLoad.type = "button";
-          btnLoad.className = "mini-btn open";
-          btnLoad.textContent = "Buka";
-          btnLoad.onclick = () => loadPatientById(p.id);
-          const btnDel = document.createElement("button");
-          btnDel.type = "button";
-          btnDel.className = "mini-btn del";
-          btnDel.title = "Hapus";
-          btnDel.textContent = "🗑";
-          btnDel.onclick = () => deletePatientById(p.id, p.nama_pasien || p.no_rm);
-
-          acts.append(btnLoad, btnDel);
-          item.append(chk, av, info, acts);
+          item.querySelector(".pc-head").addEventListener("click", (e) => {
+            if (e.target.closest(".pat-chk, .pc-btn")) return;
+            item.classList.toggle("open");
+          });
+          item.querySelector(".pc-btn.edit").addEventListener("click", () => loadPatientById(p.id));
+          item.querySelector(".pc-btn.del").addEventListener("click", () => deletePatientById(p.id, p.nama_pasien || p.no_rm));
           container.appendChild(item);
         });
         updateSelUI();
@@ -1699,6 +1768,17 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
           layer.appendChild(c);
         };
 
+        {
+          const jRuang = String(state.ruangKelas || "").split("/")[0].trim();
+          const jTitle = [String(state.namaPasien || "").trim(), jRuang].filter(Boolean).join(" / ");
+          if (jTitle) {
+            addText({ type: "point", key: "judul" }, jTitle, coords.judul.x, coords.judul.y, { size: "16pt" });
+            const el = layer.lastElementChild;
+            const maxW = Math.max(40, 298 - coords.judul.x) * (96 / 25.4);
+            let fs = parseFloat(getComputedStyle(el).fontSize) || 21;
+            while (el.scrollWidth > maxW && fs > 10) { fs -= 0.5; el.style.fontSize = fs + "px"; }
+          }
+        }
         addText({ type: "point", key: "dokter" }, state.dokter, coords.dokter.x, coords.dokter.y);
         addText({ type: "point", key: "diagnosis" }, state.diagnosis, coords.diagnosis.x, coords.diagnosis.y);
         if (state.diagnosis) {
