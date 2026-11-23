@@ -636,6 +636,42 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
 .pc-ist b{display:block;margin-bottom:4px}.pc-ist span{font-weight:800}
 .pc-upd{font-size:11px;color:#a9a7bd;margin-top:10px;text-align:right}
 @media(max-width:480px){.pc-head{gap:8px;padding:12px 10px 12px 12px}.pc-room{width:50px;height:50px;border-radius:16px}.pc-name{font-size:14.5px}.pc-btn{width:34px;height:34px}.pc-acts{gap:4px}.m-head,.m-body{padding-left:14px;padding-right:14px}.m-foot{padding-left:14px;padding-right:14px}}
+.rail button.cur{background:var(--dark);color:#fff}.rail button.cur .ic{background:rgba(255,255,255,.18)}
+#view-jadwal{display:none}
+.main.v-jadwal #view-jadwal{display:block}
+.main.v-jadwal .workspace,.main.v-jadwal .welcome{display:none}
+.jd{--pu:#7b6fd6;--pu2:#6a55c4}
+.jd-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.jd-top h1{font-size:25px;font-weight:600}.jd-top p{font-size:12px;color:#5d7f7c;margin-top:2px}
+#jd-refresh{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--ink);font-size:18px;padding:0;box-shadow:0 4px 14px rgba(7,51,47,.1)}
+.jd-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;margin-bottom:10px}
+.jd-chips button{flex-shrink:0;background:#fff;color:var(--ink);border-radius:999px;padding:11px 20px;font-size:13px;font-weight:600;font-family:inherit;box-shadow:0 3px 10px rgba(7,51,47,.06)}
+.jd-chips button.on{background:var(--pu);color:#fff}
+.jd-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin-bottom:14px}
+.jd-legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;background:var(--c)}
+.ty-inj{--c:#d4566a;--bg:#fde2e6}.ty-ora{--c:#3b62d9;--bg:#dfe8ff}.ty-inf{--c:#1c9a82;--bg:#d6f3ea}
+.jd-wrap{background:#fff;border-radius:32px;padding:16px;display:flex;flex-direction:column;gap:14px;min-height:140px}
+.jd-card{border-radius:26px;border:2px solid #e8e5fb;overflow:hidden;background:#fff;transition:.2s}
+.jd-card.open{border-color:#8f84dc;box-shadow:0 14px 30px -12px rgba(106,85,196,.45)}
+.jd-head{display:flex;align-items:center;gap:14px;padding:14px 16px;background:linear-gradient(135deg,#8579d6,#6a55c4);color:#fff;cursor:pointer}
+.jd-room{min-width:64px;height:64px;padding:0 8px;border-radius:20px;background:#fff;color:var(--pu2);display:grid;place-items:center;font-weight:800;font-size:20px;flex-shrink:0}
+.jd-info{flex:1;min-width:0}.jd-info b{display:block;font-size:19px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jd-info span{display:block;font-size:12.5px;opacity:.85;margin-top:3px}
+.jd-chev{width:10px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(-45deg);transition:.2s;flex-shrink:0;margin-right:4px}
+.jd-card.open .jd-chev{transform:rotate(45deg)}
+.jd-body{display:none;padding:6px 16px 16px}.jd-card.open .jd-body{display:block}
+.jd-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid #eeeff5}
+.jd-row:last-of-type{border-bottom:0}
+.jd-time{min-width:66px;height:66px;padding:0 6px;border-radius:20px;background:var(--bg);color:var(--c);display:grid;place-items:center;font-weight:800;font-size:17px;flex-shrink:0;text-align:center}
+.jd-time.nt{font-size:13px}
+.jd-main{flex:1;min-width:0}.jd-main b{display:block;font-size:16px;font-weight:600;color:#1b2430}
+.jd-dose{font-size:13px;color:#4a5568;margin-top:2px}
+.jd-sub{font-size:12.5px;color:#7a8794;margin-top:3px}.jd-sub .t{color:var(--c);font-weight:700}
+.jd-ist{margin-top:10px;background:#fff6cf;border:1.5px solid #f0d36b;border-radius:20px;padding:12px 14px;color:#6b4f00}
+.jd-ist h4{font-size:12.5px;font-weight:800;letter-spacing:.03em;margin-bottom:6px}
+.jd-ist div{font-size:13.5px;padding:3px 0;line-height:1.4}.jd-ist b{font-weight:800;margin-right:6px}.jd-ist em{font-style:normal;opacity:.7;font-size:12px}
+.jd-empty{text-align:center;color:#8a99a8;font-size:13px;padding:36px 0}.jd-empty.err{color:#b4232f}
+@media print{#view-jadwal{display:none!important}.main.v-jadwal .workspace{display:block!important}}
 </style>
 </head>
 <body>
@@ -643,6 +679,8 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
     <aside class="rail">
       <div class="logo"><i>+</i><span>RMRI 05.00</span></div>
       <small>MENU UTAMA</small>
+      <button type="button" id="nav-form" class="cur"><span class="ic">📝</span>Form Pasien</button>
+      <button type="button" id="nav-jadwal"><span class="ic">💊</span>Jadwal Obat</button>
       <button type="button" class="btn-list" id="btn-open-list"><span class="ic">📋</span>Data Pasien</button>
       <button type="button" class="btn-clear" id="btn-clear"><span class="ic">🗑️</span>Baru</button>
       <small>ALAT</small>
@@ -658,6 +696,12 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         <div><h1>Implementasi Keperawatan</h1><p>Form RMRI 05.00 · RSUD dr. Abdul Rivai</p></div>
         <button type="button" class="btn-print" id="btn-print">🖨️ Print PDF</button>
       </div>
+      <section id="view-jadwal" class="jd">
+        <div class="jd-top"><div><h1>Jadwal Obat</h1><p id="jd-date"></p></div><button type="button" id="jd-refresh" aria-label="Muat ulang">↻</button></div>
+        <div class="jd-chips" id="jd-chips"></div>
+        <div class="jd-legend"><span><i class="ty-inj"></i>Injeksi</span><span><i class="ty-ora"></i>Oral</span><span><i class="ty-inf"></i>Infus</span></div>
+        <div class="jd-wrap" id="jd-list"></div>
+      </section>
       <div class="workspace">
     <div class="sidebar">
       <div class="status-bar" id="cloud-status">
@@ -1282,6 +1326,108 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
         renderPatientList(filtered);
       }
 
+      const escHtml = (v) => String(v == null ? "" : v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const JD_SHIFTS = [["pagi", "Pagi"], ["siang", "Siang"], ["sore", "Sore"], ["malam", "Malam"], ["extra", "Extra"]];
+      const JD_TYPES = { INFUS: { label: "Infus", cls: "ty-inf" }, INJEKSI: { label: "Injeksi", cls: "ty-inj" }, ORAL: { label: "Oral", cls: "ty-ora" } };
+      let jdData = [];
+      let jdFilter = "all";
+
+      function normJam(j) {
+        j = String(j).trim();
+        let m = j.match(/^(\d{1,2})$/);
+        if (m) return m[1].padStart(2, "0") + ":00";
+        m = j.match(/^(\d{1,2})[.:](\d{2})$/);
+        if (m) return m[1].padStart(2, "0") + ":" + m[2];
+        return j;
+      }
+
+      function jdBuild(p) {
+        const fd = p.form_data || {};
+        const ruang = (String(fd.ruangKelas || "").split("/")[0] || "").trim();
+        const rows = [];
+        ["INFUS", "INJEKSI", "ORAL"].forEach((g) => {
+          ((fd.meds && fd.meds[g]) || []).forEach((m) => {
+            if (!m || !String(m.nama || "").trim()) return;
+            const nama = String(m.nama).trim(), dosis = String(m.dosis || "").trim();
+            let any = false;
+            JD_SHIFTS.forEach(([k]) => {
+              const jam = String(m[k + "Jam"] || "").trim();
+              if (jam) { any = true; rows.push({ g, nama, dosis, shift: k, jam }); }
+            });
+            if (!any) rows.push({ g, nama, dosis, shift: null, jam: "" });
+          });
+        });
+        const so = (r) => (r.shift ? JD_SHIFTS.findIndex((x) => x[0] === r.shift) : 99);
+        rows.sort((a, b) => so(a) - so(b) || normJam(a.jam).localeCompare(normJam(b.jam)) || Object.keys(JD_TYPES).indexOf(a.g) - Object.keys(JD_TYPES).indexOf(b.g));
+        const ist = (Array.isArray(fd.istimewa) ? fd.istimewa : []).filter((r) => r && [r.jam, r.ket, r.paraf].some((v) => String(v || "").trim()));
+        return { id: p.id, nama: p.nama_pasien || fd.namaPasien || "-", ruang, dokter: String(fd.dokter || "").trim(), rows, ist };
+      }
+
+      function renderJadwal() {
+        const list = document.getElementById("jd-list");
+        const pts = jdData.map(jdBuild).filter((pt) => pt.rows.length || pt.ist.length);
+        const cnt = { all: 0 };
+        JD_SHIFTS.forEach(([k]) => (cnt[k] = 0));
+        pts.forEach((pt) => pt.rows.forEach((r) => { if (r.shift) { cnt[r.shift]++; cnt.all++; } }));
+        const chips = [["all", "Semua"]].concat(JD_SHIFTS.filter(([k]) => k !== "extra" || cnt.extra > 0));
+        if (!chips.some((c) => c[0] === jdFilter)) jdFilter = "all";
+        document.getElementById("jd-chips").innerHTML = chips.map(([k, lab]) => '<button type="button" data-f="' + k + '" class="' + (k === jdFilter ? "on" : "") + '">' + lab + " (" + cnt[k] + ")</button>").join("");
+
+        const vis = pts
+          .map((pt) => ({ pt, rows: jdFilter === "all" ? pt.rows : pt.rows.filter((r) => r.shift === jdFilter || r.shift === null) }))
+          .filter((x) => x.rows.length || (jdFilter === "all" && x.pt.ist.length));
+        if (!vis.length) {
+          list.innerHTML = '<div class="jd-empty">' + (pts.length ? "Tidak ada obat pada shift ini." : "Belum ada data pasien tersimpan.") + "</div>";
+          return;
+        }
+        list.innerHTML = vis.map((x, i) => {
+          const pt = x.pt;
+          const doses = pt.rows.filter((r) => r.shift).length, nt = pt.rows.length - doses;
+          const sub = [pt.dokter, doses + " jadwal", nt ? nt + " tanpa jam" : ""].filter(Boolean).join(" · ");
+          const rowsHtml = x.rows.map((r) => {
+            const ty = JD_TYPES[r.g];
+            const sh = r.shift ? JD_SHIFTS.find((s2) => s2[0] === r.shift)[1] : "tanpa jam";
+            return '<div class="jd-row ' + ty.cls + '"><div class="jd-time' + (r.jam ? "" : " nt") + '">' + escHtml(r.jam ? normJam(r.jam) : ty.label) + '</div><div class="jd-main"><b>' + escHtml(r.nama) + "</b>" +
+              (r.dosis ? '<div class="jd-dose">' + escHtml(r.dosis) + "</div>" : "") + '<div class="jd-sub"><span class="t">' + ty.label + "</span> · " + sh + "</div></div></div>";
+          }).join("");
+          const istHtml = pt.ist.length ? '<div class="jd-ist"><h4>★ HAL ISTIMEWA</h4>' + pt.ist.map((r) => "<div>" + (r.jam ? "<b>" + escHtml(r.jam) + "</b>" : "") + escHtml(r.ket || "") + (r.paraf ? " <em>— " + escHtml(r.paraf) + "</em>" : "") + "</div>").join("") + "</div>" : "";
+          return '<div class="jd-card' + (i === 0 ? " open" : "") + '"><div class="jd-head"><div class="jd-room">' + escHtml(pt.ruang || "–") + '</div><div class="jd-info"><b>' + escHtml(String(pt.nama).toUpperCase()) + "</b><span>" + escHtml(sub) + '</span></div><i class="jd-chev"></i></div><div class="jd-body">' + rowsHtml + istHtml + "</div></div>";
+        }).join("");
+      }
+
+      async function loadJadwal() {
+        document.getElementById("jd-date").textContent = new Date().toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long" });
+        document.getElementById("jd-list").innerHTML = '<div class="jd-empty">Mengambil jadwal obat...</div>';
+        try {
+          const res = await fetch(`${TABLE_ENDPOINT}?select=id,no_rm,nama_pasien,form_data,updated_at&order=updated_at.desc&limit=200`, { method: "GET", headers: getSupaHeaders() });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          jdData = await res.json();
+          renderJadwal();
+        } catch (err) {
+          document.getElementById("jd-list").innerHTML = '<div class="jd-empty err">Gagal memuat jadwal: ' + escHtml(err.message) + "</div>";
+        }
+      }
+
+      function showView(v) {
+        document.querySelector(".main").classList.toggle("v-jadwal", v === "jadwal");
+        document.getElementById("nav-form").classList.toggle("cur", v !== "jadwal");
+        document.getElementById("nav-jadwal").classList.toggle("cur", v === "jadwal");
+        if (v === "jadwal") loadJadwal();
+      }
+
+      document.getElementById("nav-form").addEventListener("click", () => showView("form"));
+      document.getElementById("nav-jadwal").addEventListener("click", () => showView("jadwal"));
+      document.getElementById("jd-refresh").addEventListener("click", loadJadwal);
+      ["btn-clear", "btn-sample", "btn-calib"].forEach((id) => document.getElementById(id).addEventListener("click", () => showView("form")));
+      document.getElementById("jd-chips").addEventListener("click", (e) => {
+        const b = e.target.closest("button[data-f]");
+        if (b) { jdFilter = b.dataset.f; renderJadwal(); }
+      });
+      document.getElementById("jd-list").addEventListener("click", (e) => {
+        const h = e.target.closest(".jd-head");
+        if (h) h.parentElement.classList.toggle("open");
+      });
+
       const selIds = new Set();
       let printStart = 0;
 
@@ -1452,7 +1598,7 @@ input,select,textarea{border-radius:12px;border-color:var(--line);padding:8px 12
             if (e.target.closest(".pat-chk, .pc-btn")) return;
             item.classList.toggle("open");
           });
-          item.querySelector(".pc-btn.edit").addEventListener("click", () => loadPatientById(p.id));
+          item.querySelector(".pc-btn.edit").addEventListener("click", () => { showView("form"); loadPatientById(p.id); });
           item.querySelector(".pc-btn.del").addEventListener("click", () => deletePatientById(p.id, p.nama_pasien || p.no_rm));
           container.appendChild(item);
         });
