@@ -726,6 +726,43 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
 @media print{.hero,.quick,.banner,.tabbar{display:none!important}.sheet{padding:0!important;margin:0!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:block!important}.app{padding:0!important}}
 .quick #btn-print{background:none;color:var(--ink);padding:0;border-radius:0;font-size:12px;box-shadow:none}
 .hsearch input::placeholder{color:#8aa3a1!important;opacity:1}
+.pv{display:none}
+.main.v-pasien .pv{display:block}
+.main.v-pasien .workspace,.main.v-pasien .quick,.main.v-pasien .banner{display:none}
+.pv .m-search{margin-bottom:12px;max-width:640px}
+.pv .m-pills{margin-bottom:10px;padding:2px 2px 6px}
+.pv .m-pills button{padding:11px 20px;font-size:13px;border:0;box-shadow:0 3px 10px rgba(7,51,47,.06)}
+.pv .m-filters{margin-bottom:14px;max-width:640px}
+#pv-refresh{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--ink);font-size:18px;padding:0;box-shadow:0 4px 14px rgba(7,51,47,.1)}
+.pv #patient-list-container{background:#f4faf9;border-radius:32px;padding:16px;gap:14px;overflow:visible;min-height:140px}
+.pv .m-foot{position:sticky;bottom:96px;z-index:40;margin-top:14px;border:1px solid #dcebe9;border-radius:24px;box-shadow:0 14px 30px -14px rgba(11,111,112,.4);background:#fff;padding:12px 16px}
+@media print{.pv{display:none!important}}
+.jd-row{cursor:pointer}
+.jd-edit{width:36px;height:36px;border-radius:50%;background:#e7f1f0;display:grid;place-items:center;flex-shrink:0}
+.jd-edit svg{width:17px;height:17px;fill:none;stroke:#0e7a7a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.jd-add{width:100%;margin-top:10px;background:#e7f4f2;color:#0e7a7a;border:1.5px dashed #7fcfc4;border-radius:18px;padding:12px;font-size:13px;font-weight:700;font-family:inherit}
+.ms-back{position:fixed;inset:0;background:rgba(7,51,47,.4);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);z-index:300;display:none;align-items:flex-end;justify-content:center}
+.ms-back.open{display:flex}
+.ms-box{background:#fff;width:min(520px,100%);border-radius:28px 28px 0 0;padding:22px 20px 26px;max-height:94vh;overflow:auto;color:var(--ink)}
+@media(min-width:700px){.ms-back{align-items:center}.ms-box{border-radius:28px}}
+.ms-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px}
+.ms-head h3{font-size:20px;font-weight:700}.ms-head p{font-size:12.5px;color:#6b8790;margin-top:2px}
+#ms-x{width:36px;height:36px;border-radius:50%;background:#eef4f3;color:var(--ink);padding:0;font-size:14px}
+.ms-box label{display:block;font-size:12px;font-weight:700;color:#5d7f7c;margin:14px 0 6px}
+.ms-box input{border-radius:14px;padding:12px 14px;font-size:15px;background:#f4faf9}
+.ms-types{display:flex;gap:8px;margin-top:8px}
+.ms-types button{flex:1;border-radius:999px;padding:10px;font-size:13px;font-weight:700;background:var(--bg);color:var(--c);border:2px solid transparent;font-family:inherit}
+.ms-types button.on{border-color:var(--c)}
+.ms-badge{display:none;margin-top:8px;font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px;background:var(--bg);color:var(--c)}
+.ms-jam{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.ms-jam span{display:block;font-size:11px;font-weight:700;color:#6b8790;margin-bottom:4px;text-align:center}
+.ms-jam input{text-align:center;padding:12px 4px;font-size:14px}
+.ms-actions{display:flex;gap:8px;margin-top:22px}
+.ms-actions button{flex:1;border-radius:999px;padding:14px;font-size:14px;font-weight:700;font-family:inherit;background:#e7f1f0;color:var(--ink)}
+.ms-actions #ms-save{flex:2;background:var(--dark);color:#fff}
+.ms-actions #ms-del{background:#fde2e6;color:#c0364b}
+.ms-actions button:disabled{opacity:.5}
+@media print{.ms-back{display:none!important}}
 </style>
 </head>
 <body>
@@ -758,6 +795,24 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
         <div class="jd-chips" id="jd-chips"></div>
         <div class="jd-legend"><span><i class="ty-inj"></i>Injeksi</span><span><i class="ty-ora"></i>Oral</span><span><i class="ty-inf"></i>Infus</span></div>
         <div class="jd-wrap" id="jd-list"></div>
+      </section>
+      <section id="patient-modal" class="pv">
+        <div class="jd-top"><div><h1>Data Pasien</h1><p id="pat-count">Memuat data...</p></div><button type="button" id="pv-refresh" aria-label="Muat ulang">↻</button><button type="button" id="btn-close-modal" style="display:none" aria-label="Tutup">✕</button></div>
+        <div class="m-search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="text" id="search-patient" placeholder="Cari nama, No. RM, dokter..." autocomplete="off" />
+        </div>
+        <div class="m-pills" id="ist-pills"><button type="button" data-v="" data-l="Semua" class="on">Semua</button><button type="button" data-v="ada" data-l="★ Istimewa">★ Istimewa</button><button type="button" data-v="tidak" data-l="Tanpa Istimewa">Tanpa Istimewa</button></div>
+        <div class="m-filters">
+          <select id="filter-dokter"><option value="">Semua Dokter</option></select>
+          <select id="filter-kelas"><option value="">Semua Kelas</option></select>
+          <select id="filter-ist"><option value="">Semua Pasien</option><option value="ada">★ Ada Hal Istimewa</option><option value="tidak">Tanpa Hal Istimewa</option></select>
+        </div>
+        <div id="patient-list-container"><div class="pat-empty">Memuat data...</div></div>
+<div class="m-foot">
+        <label class="m-all"><input type="checkbox" class="pat-chk" id="chk-all" /><span id="sel-count">Pilih semua</span></label>
+        <button type="button" id="btn-print-sel" disabled>🖨️ Print</button>
+      </div>
       </section>
       <div class="workspace">
     <div class="sidebar">
@@ -959,29 +1014,22 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
 
   </div></main></div>
 
-  <div class="modal-backdrop" id="patient-modal">
-    <div class="modal-box">
-      <div class="m-head">
-        <div><h3>Data Pasien</h3><p id="pat-count">Memuat data...</p></div>
-        <button type="button" class="m-x" id="btn-close-modal" aria-label="Tutup">✕</button>
+  <div class="ms-back" id="med-sheet">
+    <div class="ms-box">
+      <div class="ms-head"><div><h3 id="ms-title">Edit Obat</h3><p id="ms-sub"></p></div><button type="button" id="ms-x" aria-label="Tutup">✕</button></div>
+      <div class="ms-types" id="ms-types"><button type="button" data-g="INFUS" class="ty-inf">Infus</button><button type="button" data-g="INJEKSI" class="ty-inj on">Injeksi</button><button type="button" data-g="ORAL" class="ty-ora">Oral</button></div>
+      <span class="ms-badge" id="ms-badge"></span>
+      <label for="ms-nama">Nama obat</label><input type="text" id="ms-nama" autocomplete="off" />
+      <label for="ms-dosis">Dosis &amp; interval</label><input type="text" id="ms-dosis" placeholder="mis. 3x20 mg" autocomplete="off" />
+      <label>Jam pemberian</label>
+      <div class="ms-jam">
+        <div><span>Pagi</span><input type="text" id="ms-pagi" placeholder="09" autocomplete="off" /></div>
+        <div><span>Siang</span><input type="text" id="ms-siang" placeholder="13" autocomplete="off" /></div>
+        <div><span>Sore</span><input type="text" id="ms-sore" placeholder="17" autocomplete="off" /></div>
+        <div><span>Malam</span><input type="text" id="ms-malam" placeholder="21" autocomplete="off" /></div>
+        <div><span>Extra</span><input type="text" id="ms-extra" placeholder="01" autocomplete="off" /></div>
       </div>
-      <div class="m-body">
-        <div class="m-search">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input type="text" id="search-patient" placeholder="Cari nama, No. RM, dokter..." autocomplete="off" />
-        </div>
-        <div class="m-pills" id="ist-pills"><button type="button" data-v="" data-l="Semua" class="on">Semua</button><button type="button" data-v="ada" data-l="★ Istimewa">★ Istimewa</button><button type="button" data-v="tidak" data-l="Tanpa Istimewa">Tanpa Istimewa</button></div>
-        <div class="m-filters">
-          <select id="filter-dokter"><option value="">Semua Dokter</option></select>
-          <select id="filter-kelas"><option value="">Semua Kelas</option></select>
-          <select id="filter-ist"><option value="">Semua Pasien</option><option value="ada">★ Ada Hal Istimewa</option><option value="tidak">Tanpa Hal Istimewa</option></select>
-        </div>
-        <div id="patient-list-container"><div class="pat-empty">Memuat data...</div></div>
-      </div>
-      <div class="m-foot">
-        <label class="m-all"><input type="checkbox" class="pat-chk" id="chk-all" /><span id="sel-count">Pilih semua</span></label>
-        <button type="button" id="btn-print-sel" disabled>🖨️ Print</button>
-      </div>
+      <div class="ms-actions"><button type="button" id="ms-del">Hapus</button><button type="button" id="ms-cancel">Batal</button><button type="button" id="ms-save">Simpan</button></div>
     </div>
   </div>
 
@@ -1195,9 +1243,29 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
         };
 
         try {
+          let targetId = currentRecordId;
+          let dupHit = false;
+          if (cleanRm && cleanRm !== "-") {
+            const chk = await fetch(`${TABLE_ENDPOINT}?select=id,nama_pasien&no_rm=eq.${encodeURIComponent(cleanRm)}&order=updated_at.desc&limit=5`, { method: "GET", headers: getSupaHeaders() });
+            if (!chk.ok) throw new Error(`HTTP ${chk.status}: ${await chk.text()}`);
+            const same = await chk.json();
+            if (Array.isArray(same) && same.length) {
+              const mine = same.find((r) => String(r.id) === String(currentRecordId));
+              if (mine) {
+                targetId = mine.id;
+              } else {
+                if (currentRecordId && !confirm('No. RM ' + cleanRm + ' sudah dipakai pasien "' + (same[0].nama_pasien || "-") + '".\nPerbarui data pasien tersebut dengan isian ini?')) {
+                  setStatus("Simpan dibatalkan", "");
+                  return;
+                }
+                targetId = same[0].id;
+                dupHit = true;
+              }
+            }
+          }
           let res;
-          if (currentRecordId) {
-            res = await fetch(`${TABLE_ENDPOINT}?id=eq.${encodeURIComponent(currentRecordId)}`, {
+          if (targetId) {
+            res = await fetch(`${TABLE_ENDPOINT}?id=eq.${encodeURIComponent(targetId)}`, {
               method: "PATCH",
               headers: getSupaHeaders("return=representation"),
               body: JSON.stringify(payload)
@@ -1222,8 +1290,8 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
           const savedLabel = cleanName || cleanRm;
           document.getElementById("btn-clear").click();
           if (typeof window.goStep === "function") window.goStep(1);
-          setStatus("Tersimpan (" + savedLabel + "). Form kosong, siap untuk pasien baru.", "ok");
-          showToast("Data " + savedLabel + " berhasil disimpan");
+          setStatus((dupHit ? "Diperbarui (" : "Tersimpan (") + savedLabel + "). Form kosong, siap untuk pasien baru.", "ok");
+          showToast(dupHit ? "No. RM sama: data " + savedLabel + " diperbarui" : "Data " + savedLabel + " berhasil disimpan");
         } catch (err) {
           console.error(err);
           setStatus("Gagal simpan: cek tabel/RLS Supabase", "err");
@@ -1387,6 +1455,7 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
       const JD_TYPES = { INFUS: { label: "Infus", cls: "ty-inf" }, INJEKSI: { label: "Injeksi", cls: "ty-inj" }, ORAL: { label: "Oral", cls: "ty-ora" } };
       let jdData = [];
       let jdFilter = "all";
+      let jdKeep = null;
 
       function normJam(j) {
         j = String(j).trim();
@@ -1402,15 +1471,15 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
         const ruang = (String(fd.ruangKelas || "").split("/")[0] || "").trim();
         const rows = [];
         ["INFUS", "INJEKSI", "ORAL"].forEach((g) => {
-          ((fd.meds && fd.meds[g]) || []).forEach((m) => {
+          ((fd.meds && fd.meds[g]) || []).forEach((m, mi) => {
             if (!m || !String(m.nama || "").trim()) return;
             const nama = String(m.nama).trim(), dosis = String(m.dosis || "").trim();
             let any = false;
             JD_SHIFTS.forEach(([k]) => {
               const jam = String(m[k + "Jam"] || "").trim();
-              if (jam) { any = true; rows.push({ g, nama, dosis, shift: k, jam }); }
+              if (jam) { any = true; rows.push({ g, mi, nama, dosis, shift: k, jam }); }
             });
-            if (!any) rows.push({ g, nama, dosis, shift: null, jam: "" });
+            if (!any) rows.push({ g, mi, nama, dosis, shift: null, jam: "" });
           });
         });
         const so = (r) => (r.shift ? JD_SHIFTS.findIndex((x) => x[0] === r.shift) : 99);
@@ -1420,6 +1489,8 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
       }
 
       function renderJadwal() {
+        const keep = jdKeep;
+        jdKeep = null;
         const list = document.getElementById("jd-list");
         const pts = jdData.map(jdBuild).filter((pt) => pt.rows.length || pt.ist.length);
         const cnt = { all: 0 };
@@ -1443,11 +1514,11 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
           const rowsHtml = x.rows.map((r) => {
             const ty = JD_TYPES[r.g];
             const sh = r.shift ? JD_SHIFTS.find((s2) => s2[0] === r.shift)[1] : "tanpa jam";
-            return '<div class="jd-row ' + ty.cls + '"><div class="jd-time' + (r.jam ? "" : " nt") + '">' + escHtml(r.jam ? normJam(r.jam) : ty.label) + '</div><div class="jd-main"><b>' + escHtml(r.nama) + "</b>" +
-              (r.dosis ? '<div class="jd-dose">' + escHtml(r.dosis) + "</div>" : "") + '<div class="jd-sub"><span class="t">' + ty.label + "</span> · " + sh + "</div></div></div>";
+            return '<div class="jd-row ' + ty.cls + '" data-pid="' + escHtml(String(pt.id)) + '" data-g="' + r.g + '" data-mi="' + r.mi + '"><div class="jd-time' + (r.jam ? "" : " nt") + '">' + escHtml(r.jam ? normJam(r.jam) : ty.label) + '</div><div class="jd-main"><b>' + escHtml(r.nama) + "</b>" +
+              (r.dosis ? '<div class="jd-dose">' + escHtml(r.dosis) + "</div>" : "") + '<div class="jd-sub"><span class="t">' + ty.label + "</span> · " + sh + '</div></div><span class="jd-edit" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span></div>';
           }).join("");
           const istHtml = pt.ist.length ? '<div class="jd-ist"><h4>★ HAL ISTIMEWA</h4>' + pt.ist.map((r) => "<div>" + (r.jam ? "<b>" + escHtml(r.jam) + "</b>" : "") + escHtml(r.ket || "") + (r.paraf ? " <em>— " + escHtml(r.paraf) + "</em>" : "") + "</div>").join("") + "</div>" : "";
-          return '<div class="jd-card' + (i === 0 ? " open" : "") + '"><div class="jd-head"><div class="jd-room">' + escHtml(pt.ruang || "–") + '</div><div class="jd-info"><b>' + escHtml(String(pt.nama).toUpperCase()) + "</b><span>" + escHtml(sub) + '</span></div><i class="jd-chev"></i></div><div class="jd-body">' + rowsHtml + istHtml + "</div></div>";
+          return '<div class="jd-card' + ((keep ? keep.has(String(pt.id)) : i === 0) ? " open" : "") + '" data-pid="' + escHtml(String(pt.id)) + '"><div class="jd-head"><div class="jd-room">' + escHtml(pt.ruang || "–") + '</div><div class="jd-info"><b>' + escHtml(String(pt.nama).toUpperCase()) + "</b><span>" + escHtml(sub) + '</span></div><i class="jd-chev"></i></div><div class="jd-body">' + rowsHtml + '<button type="button" class="jd-add" data-pid="' + escHtml(String(pt.id)) + '">＋ Tambah obat</button>' + istHtml + "</div></div>";
         }).join("");
       }
 
@@ -1465,10 +1536,16 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
       }
 
       function showView(v) {
-        document.querySelector(".main").classList.toggle("v-jadwal", v === "jadwal");
-        document.getElementById("nav-form").classList.toggle("cur", v !== "jadwal");
+        const m = document.querySelector(".main");
+        m.classList.toggle("v-jadwal", v === "jadwal");
+        m.classList.toggle("v-pasien", v === "pasien");
+        document.getElementById("nav-form").classList.toggle("cur", v !== "jadwal" && v !== "pasien");
         document.getElementById("nav-jadwal").classList.toggle("cur", v === "jadwal");
+        document.getElementById("btn-open-list").classList.toggle("cur", v === "pasien");
+        if (showView._v !== v) window.scrollTo(0, 0);
+        showView._v = v;
         if (v === "jadwal") loadJadwal();
+        if (v === "pasien") fetchPatientsFromSupabase();
       }
 
       document.getElementById("nav-form").addEventListener("click", () => showView("form"));
@@ -1480,9 +1557,112 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
         if (b) { jdFilter = b.dataset.f; renderJadwal(); }
       });
       document.getElementById("jd-list").addEventListener("click", (e) => {
+        const ad = e.target.closest(".jd-add");
+        if (ad) { openMedSheet(ad.dataset.pid, null, null); return; }
+        const rw = e.target.closest(".jd-row");
+        if (rw) { openMedSheet(rw.dataset.pid, rw.dataset.g, parseInt(rw.dataset.mi, 10)); return; }
         const h = e.target.closest(".jd-head");
         if (h) h.parentElement.classList.toggle("open");
       });
+
+      const ms = { pid: null, g: "INJEKSI", mi: null, old: "" };
+      const MS_KEYS = [["pagi", "ms-pagi"], ["siang", "ms-siang"], ["sore", "ms-sore"], ["malam", "ms-malam"], ["extra", "ms-extra"]];
+      const msVal = (id) => document.getElementById(id).value.trim();
+
+      function msSetType(g) {
+        ms.g = g;
+        document.querySelectorAll("#ms-types button").forEach((b) => b.classList.toggle("on", b.dataset.g === g));
+      }
+
+      function openMedSheet(pid, g, mi) {
+        const p = jdData.find((x) => String(x.id) === String(pid));
+        if (!p) return;
+        const isEdit = mi !== null && !isNaN(mi);
+        const m = isEdit ? (((p.form_data || {}).meds || {})[g] || [])[mi] : null;
+        ms.pid = p.id; ms.mi = isEdit ? mi : null; ms.old = m ? String(m.nama || "").trim() : "";
+        msSetType(isEdit ? g : (jdFilter === "all" ? "INJEKSI" : ms.g));
+        document.getElementById("ms-title").textContent = isEdit ? "Edit Obat" : "Tambah Obat";
+        document.getElementById("ms-sub").textContent = p.nama_pasien || "-";
+        document.getElementById("ms-types").style.display = isEdit ? "none" : "flex";
+        const bd = document.getElementById("ms-badge");
+        bd.style.display = isEdit ? "inline-block" : "none";
+        bd.textContent = JD_TYPES[ms.g].label;
+        bd.className = "ms-badge " + JD_TYPES[ms.g].cls;
+        document.getElementById("ms-del").style.display = isEdit ? "block" : "none";
+        document.getElementById("ms-nama").value = m ? m.nama || "" : "";
+        document.getElementById("ms-dosis").value = m ? m.dosis || "" : "";
+        MS_KEYS.forEach(([k, id]) => (document.getElementById(id).value = m ? m[k + "Jam"] || "" : ""));
+        const tt = document.getElementById("toast");
+        if (tt) tt.classList.remove("show");
+        document.getElementById("med-sheet").classList.add("open");
+        setTimeout(() => document.getElementById("ms-nama").focus(), 50);
+      }
+
+      function closeMedSheet() { document.getElementById("med-sheet").classList.remove("open"); }
+
+      async function msCommit(mutator, okMsg) {
+        const btns = document.querySelectorAll("#med-sheet .ms-actions button");
+        btns.forEach((b) => (b.disabled = true));
+        try {
+          const url = `${TABLE_ENDPOINT}?id=eq.${encodeURIComponent(ms.pid)}`;
+          const r0 = await fetch(url + "&select=form_data", { method: "GET", headers: getSupaHeaders() });
+          if (!r0.ok) throw new Error("HTTP " + r0.status);
+          const got = await r0.json();
+          if (!got.length) throw new Error("Data pasien tidak ditemukan, muat ulang halaman.");
+          const fd = got[0].form_data || {};
+          fd.meds = fd.meds || {};
+          const arr = (fd.meds[ms.g] = Array.isArray(fd.meds[ms.g]) ? fd.meds[ms.g] : []);
+          mutator(arr);
+          const stamp = new Date().toISOString();
+          const rp = await fetch(url, { method: "PATCH", headers: getSupaHeaders("return=representation"), body: JSON.stringify({ form_data: fd, updated_at: stamp }) });
+          if (!rp.ok) throw new Error(`HTTP ${rp.status}: ${await rp.text()}`);
+          const p = jdData.find((x) => String(x.id) === String(ms.pid));
+          if (p) { p.form_data = fd; p.updated_at = stamp; }
+          jdKeep = new Set(Array.from(document.querySelectorAll(".jd-card.open")).map((c) => c.dataset.pid));
+          closeMedSheet();
+          renderJadwal();
+          showToast(okMsg);
+        } catch (err) {
+          alert("Gagal menyimpan obat:\n" + err.message);
+        } finally {
+          btns.forEach((b) => (b.disabled = false));
+        }
+      }
+
+      function msFind(arr) {
+        let i = ms.mi;
+        if (!arr[i] || String(arr[i].nama || "").trim() !== ms.old) i = arr.findIndex((x) => String(x.nama || "").trim() === ms.old);
+        if (i < 0) throw new Error("Obat tidak ditemukan (data sudah berubah), muat ulang halaman.");
+        return i;
+      }
+
+      function saveMed() {
+        const nama = msVal("ms-nama");
+        if (!nama) { alert("Nama obat wajib diisi."); return; }
+        const f = { nama, dosis: msVal("ms-dosis") };
+        MS_KEYS.forEach(([k, id]) => (f[k + "Jam"] = msVal(id)));
+        const isEdit = ms.mi !== null;
+        msCommit((arr) => {
+          if (isEdit) { Object.assign(arr[msFind(arr)], f); return; }
+          const empty = arr.findIndex((x) => !String(x.nama || "").trim() && MS_KEYS.every(([k]) => !String(x[k + "Jam"] || "").trim()));
+          if (empty >= 0) arr[empty] = Object.assign(createEmptyMed(), f);
+          else if (arr.length < MAX_ROWS[ms.g]) arr.push(Object.assign(createEmptyMed(), f));
+          else throw new Error("Daftar " + JD_TYPES[ms.g].label + " sudah penuh (" + MAX_ROWS[ms.g] + " baris).");
+        }, "Obat " + nama + (isEdit ? " diperbarui" : " ditambahkan"));
+      }
+
+      function deleteMed() {
+        if (!confirm('Hapus obat "' + ms.old + '" dari daftar pasien ini?')) return;
+        msCommit((arr) => { arr.splice(msFind(arr), 1); if (!arr.length) arr.push(createEmptyMed()); }, "Obat " + ms.old + " dihapus");
+      }
+
+      document.getElementById("ms-save").addEventListener("click", saveMed);
+      document.getElementById("ms-del").addEventListener("click", deleteMed);
+      document.getElementById("ms-cancel").addEventListener("click", closeMedSheet);
+      document.getElementById("ms-x").addEventListener("click", closeMedSheet);
+      document.getElementById("med-sheet").addEventListener("click", (e) => { if (e.target.id === "med-sheet") closeMedSheet(); });
+      document.querySelectorAll("#ms-types button").forEach((b) => b.addEventListener("click", () => msSetType(b.dataset.g)));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMedSheet(); });
 
       const selIds = new Set();
       let printStart = 0;
@@ -1617,7 +1797,7 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
 
           const fs = ruang.length <= 2 ? 26 : ruang.length === 3 ? 20 : ruang.length === 4 ? 15 : 11;
           const item = document.createElement("div");
-          item.className = "pat-item pc" + (i === 0 ? " open" : "");
+          item.className = "pat-item pc";
           item._id = p.id;
           item.innerHTML =
             '<div class="pc-head"><input type="checkbox" class="pat-chk" title="Pilih untuk print">' +
@@ -2187,9 +2367,9 @@ body{padding:0;background:#d6ede9;background-image:radial-gradient(circle at 105
 
       document.getElementById("btn-save-cloud").addEventListener("click", saveToSupabase);
       document.getElementById("btn-open-list").addEventListener("click", () => {
-        document.getElementById("patient-modal").classList.add("open");
-        fetchPatientsFromSupabase();
+        showView("pasien");
       });
+      document.getElementById("pv-refresh").addEventListener("click", () => fetchPatientsFromSupabase());
       document.getElementById("btn-close-modal").addEventListener("click", () => {
         document.getElementById("patient-modal").classList.remove("open");
       });
